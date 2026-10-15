@@ -1,0 +1,91 @@
+{
+	"name": "@aarongustafson/print-link-list",
+	"version": "0.0.1",
+	"description": "Generate a deduplicated print-only list of links and citations.",
+	"keywords": [
+		"html",
+		"custom element",
+		"web component",
+		"print",
+		"footnotes",
+		"links",
+		"citations",
+		"accessibility"
+	],
+	"author": "Aaron Gustafson <aaron@easy-designs.net> (https://www.aaron-gustafson.com/)",
+	"license": "MIT",
+	"homepage": "https://github.com/aarongustafson/print-link-list#readme",
+	"repository": {
+		"type": "git",
+		"url": "git+https://github.com/aarongustafson/print-link-list.git"
+	},
+	"bugs": {
+		"url": "https://github.com/aarongustafson/print-link-list/issues"
+	},
+	"type": "module",
+	"main": "index.js",
+	"module": "print-link-list.js",
+	"customElements": "custom-elements.json",
+	"types": "index.d.ts",
+	"exports": {
+		".": {
+			"types": "./index.d.ts",
+			"import": "./index.js"
+		},
+		"./print-link-list.js": {
+			"types": "./print-link-list.d.ts",
+			"import": "./print-link-list.js"
+		},
+		"./define.js": {
+			"types": "./define.d.ts",
+			"import": "./define.js"
+		},
+		"./custom-elements.json": "./custom-elements.json"
+	},
+	"files": [
+		"print-link-list.js",
+		"print-link-list.d.ts",
+		"define.d.ts",
+		"index.d.ts",
+		"define.js",
+		"index.js",
+		"custom-elements.json",
+		"README.md",
+		"LICENSE"
+	],
+	"engines": {
+		"node": ">=22.0.0"
+	},
+	"packageManager": "npm@11.15.0",
+	"scripts": {
+		"test": "vitest",
+		"test:ui": "vitest --ui",
+		"test:run": "vitest run",
+		"test:coverage": "vitest run --coverage",
+		"lint": "npm run lint:eslint && npm run lint:prettier",
+		"format": "npm run format:eslint && npm run format:prettier",
+		"lint:eslint": "eslint .",
+		"format:eslint": "eslint . --fix",
+		"lint:prettier": "prettier \"**/*.js\" --check --ignore-path .gitignore",
+		"format:prettier": "prettier \"**/*.js\" --write --ignore-path .gitignore",
+		"prepublishOnly": "npm run lint && npm run test:run",
+		"version": "node scripts/update-demo-versions.js && git add demo/esm.html",
+		"postversion": "git push --follow-tags"
+	},
+	"devDependencies": {
+		"@open-wc/eslint-config": "^13.1.0",
+		"@testing-library/dom": "^10.4.2",
+		"@testing-library/user-event": "^14.6.7",
+		"@vitest/coverage-v8": "^5.0.3",
+		"@vitest/ui": "^5.0.3",
+		"eslint": "^10.12.0",
+		"eslint-config-prettier": "^10.1.8",
+		"happy-dom": "^20.14.5",
+		"marked": "18.1.0",
+		"prettier": "^3.9.9",
+		"vitest": "^5.0.3"
+	},
+	"publishConfig": {
+		"access": "public"
+	}
+}
