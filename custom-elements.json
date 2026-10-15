@@ -122,12 +122,12 @@
 						{
 							"name": "--print-link-list-marker-gap",
 							"default": "0.15em",
-							"description": "Space before a printed reference marker."
+							"description": "Space before a printed reference marker. Set on the target or an ancestor of its references."
 						},
 						{
 							"name": "--print-link-list-marker-font-size",
 							"default": "0.75em",
-							"description": "Printed reference marker size."
+							"description": "Printed reference marker size. Set on the target or an ancestor of its references."
 						},
 						{
 							"name": "--print-link-list-margin",

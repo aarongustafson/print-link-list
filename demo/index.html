@@ -23,9 +23,12 @@
 				padding: 0.5rem 0.75rem;
 			}
 
+			#dynamic-example {
+				--print-link-list-marker-font-size: 0.85em;
+			}
+
 			.styled-list {
 				--print-link-list-margin: 1rem;
-				--print-link-list-marker-font-size: 0.85em;
 			}
 
 			.styled-list::part(heading) {
@@ -252,10 +255,13 @@
 					</p>
 					<div class="code-demo-pair">
 						<pre><code>&lt;style&gt;
-  .styled-list {
+						  #dynamic-example {
     --print-link-list-marker-font-size: 0.85em;
   }
-  .styled-list::part(heading) {
+						  .styled-list {
+						    --print-link-list-margin: 1rem;
+						  }
+						  .styled-list::part(heading) {
     font-family: ui-serif, Georgia, serif;
   }
 &lt;/style&gt;

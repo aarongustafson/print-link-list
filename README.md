@@ -195,11 +195,25 @@ print-link-list::part(destination) {
 
 Available custom properties:
 
-| Property | Default | Description |
-| --- | --- | --- |
-| `--print-link-list-marker-gap` | `0.15em` | Space before a printed reference marker |
-| `--print-link-list-marker-font-size` | `0.75em` | Printed reference marker size |
-| `--print-link-list-margin` | `2rem` | Space before the printed destination list |
+| Property | Set on | Default | Description |
+| --- | --- | --- | --- |
+| `--print-link-list-marker-gap` | Target or an ancestor of its references | `0.15em` | Space before a printed reference marker |
+| `--print-link-list-marker-font-size` | Target or an ancestor of its references | `0.75em` | Printed reference marker size |
+| `--print-link-list-margin` | `<print-link-list>` | `2rem` | Space before the printed destination list |
+
+Markers live in the target's light DOM, so marker properties inherit from the
+target/reference context rather than from the component:
+
+```css
+article.printable {
+	--print-link-list-marker-gap: 0.25em;
+	--print-link-list-marker-font-size: 0.85em;
+}
+
+print-link-list {
+	--print-link-list-margin: 1rem;
+}
+```
 
 Markers and the component are hidden on screen by default. Author styles can override these defaults if a screen preview is needed.
 

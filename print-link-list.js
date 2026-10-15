@@ -170,8 +170,8 @@ function uninstallSharedStyles(document) {
  * @csspart item - A list item.
  * @csspart destination - A linked destination.
  *
- * @cssprop [--print-link-list-marker-gap=0.15em] - Space before a reference marker.
- * @cssprop [--print-link-list-marker-font-size=0.75em] - Reference marker size.
+ * @cssprop [--print-link-list-marker-gap=0.15em] - Space before a reference marker. Set on the target or an ancestor of its references.
+ * @cssprop [--print-link-list-marker-font-size=0.75em] - Reference marker size. Set on the target or an ancestor of its references.
  * @cssprop [--print-link-list-margin=2rem] - Space before the printed list.
  */
 export class PrintLinkListElement extends HTMLElement {
