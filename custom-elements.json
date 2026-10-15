@@ -1,0 +1,171 @@
+{
+	"schemaVersion": "1.0.0",
+	"readme": "README.md",
+	"modules": [
+		{
+			"kind": "javascript-module",
+			"path": "print-link-list.js",
+			"declarations": [
+				{
+					"kind": "class",
+					"description": "Generates a deduplicated print-only list of links and citations.",
+					"name": "PrintLinkListElement",
+					"members": [
+						{
+							"kind": "field",
+							"name": "target",
+							"type": {
+								"text": "string"
+							},
+							"default": "\"main\"",
+							"attribute": "target",
+							"reflects": true,
+							"description": "Selector for the first content element to inspect."
+						},
+						{
+							"kind": "field",
+							"name": "heading",
+							"type": {
+								"text": "string"
+							},
+							"default": "\"Links\"",
+							"attribute": "heading",
+							"reflects": true,
+							"description": "Heading rendered above the printed destination list."
+						},
+						{
+							"kind": "field",
+							"name": "labelSource",
+							"type": {
+								"text": "string"
+							},
+							"default": "\"Source\"",
+							"attribute": "label-source",
+							"reflects": true,
+							"description": "Label rendered before citation markers."
+						},
+						{
+							"kind": "method",
+							"name": "refresh",
+							"return": {
+								"type": {
+									"text": "boolean"
+								}
+							},
+							"description": "Immediately rebuilds the markers and destination list."
+						}
+					],
+					"events": [
+						{
+							"name": "print-link-list:update",
+							"type": {
+								"text": "CustomEvent<{ destinations: number, references: number }>"
+							},
+							"description": "Fired after a successful rebuild."
+						},
+						{
+							"name": "print-link-list:error",
+							"type": {
+								"text": "CustomEvent<{ message: string, selector: string, type: \"invalid-target\" | \"target-not-found\" }>"
+							},
+							"description": "Fired when the target selector is invalid or unmatched."
+						}
+					],
+					"attributes": [
+						{
+							"name": "target",
+							"type": {
+								"text": "string"
+							},
+							"default": "\"main\"",
+							"fieldName": "target",
+							"description": "Selector for the first content element to inspect."
+						},
+						{
+							"name": "heading",
+							"type": {
+								"text": "string"
+							},
+							"default": "\"Links\"",
+							"fieldName": "heading",
+							"description": "Heading rendered above the printed destination list."
+						},
+						{
+							"name": "label-source",
+							"type": {
+								"text": "string"
+							},
+							"default": "\"Source\"",
+							"fieldName": "labelSource",
+							"description": "Label rendered before citation markers."
+						}
+					],
+					"cssParts": [
+						{
+							"name": "heading",
+							"description": "The destination-list heading."
+						},
+						{
+							"name": "list",
+							"description": "The ordered destination list."
+						},
+						{
+							"name": "item",
+							"description": "Each destination-list item."
+						},
+						{
+							"name": "destination",
+							"description": "Each linked destination."
+						}
+					],
+					"cssProperties": [
+						{
+							"name": "--print-link-list-marker-gap",
+							"default": "0.15em",
+							"description": "Space before a printed reference marker."
+						},
+						{
+							"name": "--print-link-list-marker-font-size",
+							"default": "0.75em",
+							"description": "Printed reference marker size."
+						},
+						{
+							"name": "--print-link-list-margin",
+							"default": "2rem",
+							"description": "Space before the printed destination list."
+						}
+					],
+					"superclass": {
+						"name": "HTMLElement"
+					},
+					"tagName": "print-link-list",
+					"customElement": true
+				}
+			],
+			"exports": [
+				{
+					"kind": "js",
+					"name": "PrintLinkListElement",
+					"declaration": {
+						"name": "PrintLinkListElement",
+						"module": "print-link-list.js"
+					}
+				}
+			]
+		},
+		{
+			"kind": "javascript-module",
+			"path": "define.js",
+			"exports": [
+				{
+					"kind": "js",
+					"name": "definePrintLinkList",
+					"declaration": {
+						"name": "definePrintLinkList",
+						"module": "define.js"
+					}
+				}
+			]
+		}
+	]
+}
