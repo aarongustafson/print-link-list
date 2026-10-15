@@ -1,0 +1,327 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>&lt;print-link-list&gt; Web Component Demo</title>
+		<link rel="stylesheet" href="./styles.css" />
+		<style>
+			.actions {
+				display: flex;
+				flex-wrap: wrap;
+				gap: 0.75rem;
+				margin-block: 1rem;
+			}
+
+			.actions button {
+				background: ButtonFace;
+				border: 1px solid ButtonBorder;
+				border-radius: 4px;
+				color: ButtonText;
+				cursor: pointer;
+				font: inherit;
+				padding: 0.5rem 0.75rem;
+			}
+
+			.styled-list {
+				--print-link-list-margin: 1rem;
+				--print-link-list-marker-font-size: 0.85em;
+			}
+
+			.styled-list::part(heading) {
+				font-family: ui-serif, Georgia, serif;
+			}
+
+			.styled-list::part(list) {
+				font-size: 9pt;
+			}
+
+			.styled-list::part(item) {
+				margin-block: 0.25em;
+			}
+
+			@media print {
+				header,
+				.introduction,
+				.actions,
+				.demo-section > p,
+				footer,
+				pre {
+					display: none;
+				}
+
+				.code-demo-pair {
+					display: block;
+				}
+
+				.demo {
+					border: 0;
+					padding: 0;
+				}
+			}
+		</style>
+	</head>
+	<body>
+		<header>
+			<h1>&lt;print-link-list&gt;</h1>
+			<p>
+				A deduplicated list of links and citations for printed web
+				pages. See the
+				<a
+					href="https://github.com/aarongustafson/print-link-list/blob/main/README.md"
+					>README</a
+				>
+				for installation and API documentation.
+			</p>
+		</header>
+
+		<main>
+			<div class="introduction">
+				<p>
+					Each example is independently scoped. Open print preview to
+					see its numbered markers and destination list.
+				</p>
+				<div class="actions">
+					<button type="button" data-print>Open print dialog</button>
+				</div>
+			</div>
+
+			<section>
+				<h2>Default, scoped to a block</h2>
+				<div class="demo-section">
+					<p>
+						The default heading and source label are retained. Only
+						<code>target</code> is needed to scope this instance to
+						its containing demo block.
+					</p>
+					<div class="code-demo-pair">
+						<pre><code>&lt;div id="default-example"&gt;
+  &lt;p&gt;
+    Read the
+    &lt;a href="https://alistapart.com/article/improvingprint/"&gt;
+      original article
+    &lt;/a&gt;.
+  &lt;/p&gt;
+  &lt;blockquote cite="https://www.w3.org/TR/css-page-3/"&gt;
+    Paged media has different presentation needs.
+  &lt;/blockquote&gt;
+
+  &lt;print-link-list target="#default-example"&gt;
+  &lt;/print-link-list&gt;
+&lt;/div&gt;</code></pre>
+						<div class="demo" id="default-example">
+							<p>
+								Read the
+								<a
+									href="https://alistapart.com/article/improvingprint/"
+									>original article</a
+								>
+								and explore the
+								<a href="https://www.w3.org/TR/css-page-3/"
+									>CSS Paged Media specification</a
+								>.
+							</p>
+							<blockquote
+								cite="https://www.w3.org/TR/css-page-3/"
+							>
+								Paged media has different presentation needs
+								than a continuous screen canvas.
+							</blockquote>
+
+							<print-link-list
+								target="#default-example"
+							></print-link-list>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h2>Localized labels</h2>
+				<div class="demo-section">
+					<p>
+						Translate both the list heading and the label before
+						citation superscripts.
+					</p>
+					<div class="code-demo-pair">
+						<pre><code>&lt;div id="localized-example" lang="es"&gt;
+  &lt;q cite="https://www.w3.org/WAI/fundamentals/accessibility-intro/"&gt;
+    La Web está diseñada fundamentalmente para todas las personas.
+  &lt;/q&gt;
+
+  &lt;print-link-list
+    target="#localized-example"
+    heading="Referencias"
+    label-source="Fuente"
+  &gt;&lt;/print-link-list&gt;
+&lt;/div&gt;</code></pre>
+						<div class="demo" id="localized-example" lang="es">
+							<p>
+								<q
+									cite="https://www.w3.org/WAI/fundamentals/accessibility-intro/"
+									>La Web está diseñada fundamentalmente para
+									todas las personas</q
+								>.
+							</p>
+							<p>
+								Consulta la
+								<a
+									href="https://www.w3.org/WAI/fundamentals/accessibility-intro/"
+									>introducción a la accesibilidad web</a
+								>.
+							</p>
+
+							<print-link-list
+								target="#localized-example"
+								heading="Referencias"
+								label-source="Fuente"
+							></print-link-list>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h2>Filtering and useful destinations</h2>
+				<div class="demo-section">
+					<p>
+						Repeated destinations share a number. Fragment links
+						and opted-out subtrees are ignored, while useful email,
+						telephone, and download destinations are included.
+					</p>
+					<div class="code-demo-pair">
+						<pre><code>&lt;div id="filtered-example"&gt;
+  &lt;a href="mailto:hello@example.com?subject=Demo"&gt;
+    Email the team
+  &lt;/a&gt;
+  &lt;a href="tel:+15551234567"&gt;Call support&lt;/a&gt;
+  &lt;a href="./sample.pdf" download&gt;Download the sample&lt;/a&gt;
+  &lt;a href="#local"&gt;Jump locally&lt;/a&gt;
+
+  &lt;nav data-print-link-list-ignore&gt;
+    &lt;a href="https://example.com/account"&gt;Account&lt;/a&gt;
+  &lt;/nav&gt;
+
+  &lt;print-link-list
+    target="#filtered-example"
+    heading="Contact and downloads"
+  &gt;&lt;/print-link-list&gt;
+&lt;/div&gt;</code></pre>
+						<div class="demo" id="filtered-example">
+							<p>
+								<a
+									href="mailto:hello@example.com?subject=Print%20demo"
+									>Email the team</a
+								>,
+								<a href="tel:+15551234567">call support</a>, or
+								<a href="./sample.pdf" download
+									>download the sample</a
+								>.
+							</p>
+							<p>
+								<a href="mailto:visible@example.com"
+									>visible@example.com</a
+								>
+								already communicates its destination, and
+								<a href="#filtered-example"
+									>this local fragment</a
+								>
+								does not help in print.
+							</p>
+							<nav data-print-link-list-ignore>
+								<a href="https://example.com/account"
+									>Account navigation is opted out</a
+								>.
+							</nav>
+
+							<print-link-list
+								target="#filtered-example"
+								heading="Contact and downloads"
+							></print-link-list>
+						</div>
+					</div>
+				</div>
+			</section>
+
+			<section>
+				<h2>Dynamic content and print styling</h2>
+				<div class="demo-section">
+					<p>
+						The target is observed for changes. This instance also
+						customizes marker sizing and shadow parts for print.
+					</p>
+					<div class="code-demo-pair">
+						<pre><code>&lt;style&gt;
+  .styled-list {
+    --print-link-list-marker-font-size: 0.85em;
+  }
+  .styled-list::part(heading) {
+    font-family: ui-serif, Georgia, serif;
+  }
+&lt;/style&gt;
+
+&lt;div id="dynamic-example"&gt;
+  &lt;div class="dynamic-content"&gt;…&lt;/div&gt;
+  &lt;print-link-list
+    class="styled-list"
+    target="#dynamic-example"
+    heading="Further reading"
+  &gt;&lt;/print-link-list&gt;
+&lt;/div&gt;</code></pre>
+						<div class="demo" id="dynamic-example">
+							<div class="dynamic-content">
+								<p>
+									Start with the
+									<a
+										href="https://developer.mozilla.org/docs/Web/API/MutationObserver"
+										>MutationObserver documentation</a
+									>.
+								</p>
+							</div>
+							<div class="actions">
+								<button type="button" id="add-link">
+									Add another link
+								</button>
+								<button type="button" data-print>
+									Open print dialog
+								</button>
+							</div>
+
+							<print-link-list
+								class="styled-list"
+								target="#dynamic-example"
+								heading="Further reading"
+							></print-link-list>
+						</div>
+					</div>
+				</div>
+			</section>
+		</main>
+
+		<footer>
+			<p>
+				Made with ❤️ by
+				<a href="https://github.com/aarongustafson"
+					>Aaron Gustafson</a
+				>.
+			</p>
+		</footer>
+
+		<script src="../define.js" type="module"></script>
+		<script type="module">
+			const dynamicContent = document.querySelector('.dynamic-content');
+			let dynamicLinkCount = 0;
+
+			document.querySelector('#add-link').addEventListener('click', () => {
+				dynamicLinkCount += 1;
+				const paragraph = document.createElement('p');
+				paragraph.innerHTML = `Added link ${dynamicLinkCount}: <a href="https://developer.mozilla.org/docs/Web/API/CustomEvent#example">CustomEvent example</a>.`;
+				dynamicContent.append(paragraph);
+			});
+
+			for (const button of document.querySelectorAll('[data-print]')) {
+				button.addEventListener('click', () => window.print());
+			}
+		</script>
+	</body>
+</html>

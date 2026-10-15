@@ -1,0 +1,30 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>print-link-list via unpkg</title>
+		<link rel="stylesheet" href="./styles.css" />
+	</head>
+	<body>
+		<header>
+			<h1>unpkg CDN sanity check</h1>
+			<p>Print this page to see the generated destination list.</p>
+		</header>
+
+		<main>
+			<p>
+				This page loads the definition helper from
+				<a href="https://unpkg.com/">unpkg</a>.
+			</p>
+		</main>
+
+		<print-link-list></print-link-list>
+
+		<script type="module">
+			import { definePrintLinkList } from 'https://unpkg.com/@aarongustafson/print-link-list@latest/define.js?module';
+
+			definePrintLinkList();
+		</script>
+	</body>
+</html>

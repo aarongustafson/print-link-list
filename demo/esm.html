@@ -1,0 +1,35 @@
+<!doctype html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<title>print-link-list via esm.sh</title>
+		<link rel="stylesheet" href="./styles.css" />
+	</head>
+	<body>
+		<header>
+			<h1>esm.sh CDN sanity check</h1>
+			<p>Print this page to see the generated destination list.</p>
+		</header>
+
+		<main>
+			<p>
+				This page loads the class from
+				<a href="https://esm.sh/">esm.sh</a> and registers it manually.
+			</p>
+		</main>
+
+		<print-link-list></print-link-list>
+
+		<script type="module">
+			import { PrintLinkListElement } from 'https://esm.sh/@aarongustafson/print-link-list@0.0.1/print-link-list.js?bundle&target=es2022';
+
+			if (!customElements.get('print-link-list')) {
+				customElements.define(
+					'print-link-list',
+					PrintLinkListElement,
+				);
+			}
+		</script>
+	</body>
+</html>
