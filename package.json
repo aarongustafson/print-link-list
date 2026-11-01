@@ -1,6 +1,6 @@
 {
 	"name": "@aarongustafson/print-link-list",
-	"version": "1.0.0",
+	"version": "1.0.1",
 	"description": "Generate a deduplicated print-only list of links and citations.",
 	"keywords": [
 		"html",
