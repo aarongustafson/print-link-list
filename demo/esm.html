@@ -30,13 +30,15 @@
 			<section class="demo-section">
 				<h2>Register the class, then print</h2>
 				<div class="code-demo-pair">
-					<pre><code>import { PrintLinkListElement } from
-  'https://esm.sh/@aarongustafson/print-link-list@1.0.2/print-link-list.js?bundle&amp;target=es2022';
-customElements.define('print-link-list', PrintLinkListElement);
+					<pre
+						tabindex="0"
+					><code><mark>import { PrintLinkListElement } from
+  'https://esm.sh/@aarongustafson/print-link-list@1.0.2/print-link-list.js?bundle&amp;target=es2022';</mark>
+<mark>customElements.define('print-link-list', PrintLinkListElement);</mark>
 
 &lt;div id="reading"&gt;
   &lt;a href="https://www.w3.org/TR/css-page-3/"&gt;Paged media&lt;/a&gt;
-  &lt;print-link-list target="#reading"&gt;&lt;/print-link-list&gt;
+  <mark>&lt;print-link-list target="#reading"&gt;</mark><mark>&lt;/print-link-list&gt;</mark>
 &lt;/div&gt;</code></pre>
 					<div class="demo" id="reading">
 						<p>
