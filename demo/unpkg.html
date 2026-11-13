@@ -8,18 +8,55 @@
 	</head>
 	<body>
 		<header>
-			<h1>unpkg CDN sanity check</h1>
-			<p>Print this page to see the generated destination list.</p>
+			<h1>&lt;print-link-list&gt; via unpkg</h1>
+			<p>
+				Definition-helper import. See the
+				<a
+					href="https://github.com/aarongustafson/print-link-list#readme"
+					>README</a
+				>
+				for the API.
+			</p>
 		</header>
 
 		<main>
-			<p>
+			<p class="introduction">
 				This page loads the definition helper from
-				<a href="https://unpkg.com/">unpkg</a>.
+				<a href="https://unpkg.com/">unpkg</a>. The helper module
+				registers the element automatically; calling it again is safe.
+				Use your browser’s Print command. If the CDN or JavaScript is
+				unavailable, the original links remain usable without a
+				generated list.
 			</p>
-		</main>
+			<section class="demo-section">
+				<h2>Load the helper, then print</h2>
+				<div class="code-demo-pair">
+					<pre><code>import { definePrintLinkList } from
+  'https://unpkg.com/@aarongustafson/print-link-list@latest/define.js?module';
+definePrintLinkList();
 
-		<print-link-list></print-link-list>
+&lt;div id="reading"&gt;
+  &lt;a href="https://www.w3.org/TR/css-page-3/"&gt;Paged media&lt;/a&gt;
+  &lt;print-link-list target="#reading"&gt;&lt;/print-link-list&gt;
+&lt;/div&gt;</code></pre>
+					<div class="demo" id="reading">
+						<p>
+							Read the
+							<a href="https://www.w3.org/TR/css-page-3/"
+								>Paged Media specification</a
+							>.
+						</p>
+						<print-link-list target="#reading"></print-link-list>
+					</div>
+				</div>
+			</section>
+		</main>
+		<footer>
+			<p>
+				Made with ❤️ by
+				<a href="https://github.com/aarongustafson">Aaron Gustafson</a>.
+			</p>
+		</footer>
 
 		<script type="module">
 			import { definePrintLinkList } from 'https://unpkg.com/@aarongustafson/print-link-list@latest/define.js?module';

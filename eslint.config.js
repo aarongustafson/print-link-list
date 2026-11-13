@@ -7,4 +7,14 @@ export default [
 	{
 		ignores: ['node_modules/**', 'coverage/**', 'demo/**'],
 	},
+	{
+		files: [
+			'scripts/serve.js',
+			'test/browser/**/*.js',
+			'playwright.config.js',
+		],
+		rules: {
+			'no-undef': 'off',
+		},
+	},
 ];

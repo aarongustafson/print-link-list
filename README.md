@@ -26,8 +26,8 @@ Or control registration yourself:
 
 ```js
 import {
-	PrintLinkListElement,
-	definePrintLinkList,
+  PrintLinkListElement,
+  definePrintLinkList,
 } from '@aarongustafson/print-link-list';
 
 definePrintLinkList();
@@ -48,10 +48,10 @@ By default, the component inspects the first `<main>` element.
 
 ```html
 <main>
-	<p>
-		Read the
-		<a href="https://example.com/guide">complete guide</a>.
-	</p>
+  <p>
+    Read the
+    <a href="https://example.com/guide">complete guide</a>.
+  </p>
 </main>
 
 <print-link-list></print-link-list>
@@ -72,13 +72,13 @@ Place the component wherever the destination list should appear in the printed d
 
 ```html
 <article class="printable">
-	<!-- Content -->
+  <!-- Content -->
 </article>
 
 <print-link-list
-	target="article.printable"
-	heading="References"
-	label-source="Source"
+  target="article.printable"
+  heading="References"
+  label-source="Source"
 ></print-link-list>
 ```
 
@@ -106,7 +106,7 @@ Add `data-print-link-list-ignore` to a reference or any ancestor subtree:
 
 ```html
 <nav data-print-link-list-ignore>
-	<a href="/account">Account</a>
+  <a href="/account">Account</a>
 </nav>
 ```
 
@@ -125,11 +125,11 @@ const processed = list.refresh();
 
 ## Attributes and properties
 
-| Attribute | Property | Default | Description |
-| --- | --- | --- | --- |
-| `target` | `target` | `main` | Selector for the first content element to inspect |
-| `heading` | `heading` | `Links` | Heading above the printed destination list |
-| `label-source` | `labelSource` | `Source` | Label before each citation superscript |
+| Attribute      | Property      | Default  | Description                                       |
+| -------------- | ------------- | -------- | ------------------------------------------------- |
+| `target`       | `target`      | `main`   | Selector for the first content element to inspect |
+| `heading`      | `heading`     | `Links`  | Heading above the printed destination list        |
+| `label-source` | `labelSource` | `Source` | Label before each citation superscript            |
 
 Setting any property to `null` or `undefined` removes its attribute and restores the default.
 
@@ -149,8 +149,8 @@ Fires after a successful rebuild:
 
 ```js
 list.addEventListener('print-link-list:update', (event) => {
-	console.log(event.detail);
-	// { destinations: 3, references: 5 }
+  console.log(event.detail);
+  // { destinations: 3, references: 5 }
 });
 ```
 
@@ -160,12 +160,12 @@ Fires when `target` is invalid or has no match:
 
 ```js
 list.addEventListener('print-link-list:error', (event) => {
-	console.log(event.detail);
-	// {
-	//   type: "target-not-found",
-	//   selector: ".missing",
-	//   message: "The target selector \".missing\" did not match an element."
-	// }
+  console.log(event.detail);
+  // {
+  //   type: "target-not-found",
+  //   selector: ".missing",
+  //   message: "The target selector \".missing\" did not match an element."
+  // }
 });
 ```
 
@@ -177,45 +177,61 @@ The component has an open shadow root. Its list can be styled with parts:
 
 ```css
 print-link-list::part(heading) {
-	font-family: sans-serif;
+  font-family: sans-serif;
 }
 
 print-link-list::part(list) {
-	font-size: 9pt;
+  font-size: 9pt;
 }
 
 print-link-list::part(item) {
-	margin-block: 0.25em;
+  margin-block: 0.25em;
 }
 
 print-link-list::part(destination) {
-	text-decoration: underline;
+  text-decoration: underline;
 }
 ```
 
 Available custom properties:
 
-| Property | Set on | Default | Description |
-| --- | --- | --- | --- |
-| `--print-link-list-marker-gap` | Target or an ancestor of its references | `0.15em` | Space before a printed reference marker |
-| `--print-link-list-marker-font-size` | Target or an ancestor of its references | `0.75em` | Printed reference marker size |
-| `--print-link-list-margin` | `<print-link-list>` | `2rem` | Space before the printed destination list |
+| Property                             | Set on                                  | Default  | Description                               |
+| ------------------------------------ | --------------------------------------- | -------- | ----------------------------------------- |
+| `--print-link-list-marker-gap`       | Target or an ancestor of its references | `0.15em` | Space before a printed reference marker   |
+| `--print-link-list-marker-font-size` | Target or an ancestor of its references | `0.75em` | Printed reference marker size             |
+| `--print-link-list-margin`           | `<print-link-list>`                     | `2rem`   | Space before the printed destination list |
 
 Markers live in the target's light DOM, so marker properties inherit from the
 target/reference context rather than from the component:
 
 ```css
 article.printable {
-	--print-link-list-marker-gap: 0.25em;
-	--print-link-list-marker-font-size: 0.85em;
+  --print-link-list-marker-gap: 0.25em;
+  --print-link-list-marker-font-size: 0.85em;
 }
 
 print-link-list {
-	--print-link-list-margin: 1rem;
+  --print-link-list-margin: 1rem;
 }
 ```
 
 Markers and the component are hidden on screen by default. Author styles can override these defaults if a screen preview is needed.
+
+Generated destinations inherit the surrounding text color. The component
+doesn’t supply a screen palette, force a printed color pair, or replace the
+browser’s Print command. When you author a background, pair it with a readable
+foreground and check the printed result separately from your screen theme.
+
+The demos use `CanvasText`/`Canvas` for reading panels and
+`ButtonText`/`ButtonFace` for code and buttons. Supporting footer text uses an
+opaque 80% foreground mix where supported, retaining full-strength text in
+forced colors and increased contrast. Native focus outlines remain intact.
+Print styles use black text on white paper; generated links continue to inherit.
+These are demo styles, not component defaults or guarantees for custom palettes.
+
+Bundled Ubuntu WebKit has a known dark `ButtonText`/`ButtonFace` contrast
+limitation outside the study. A narrow expected-failure test records it; the
+demos retain the purposeful native pair rather than flattening every surface.
 
 ## Accessibility
 
@@ -231,10 +247,10 @@ Without JavaScript, the source document remains readable, but a deduplicated lis
 
 ```css
 @media print {
-	a[href^='http']::after {
-		content: ' (' attr(href) ')';
-		font-size: 90%;
-	}
+  a[href^='http']::after {
+    content: ' (' attr(href) ')';
+    font-size: 90%;
+  }
 }
 ```
 
@@ -249,15 +265,26 @@ The component requires:
 - ES modules
 - `MutationObserver`
 
-It is tested in a DOM environment and should be checked in real browser print preview because pagination and print rendering cannot be fully simulated by DOM unit tests.
+Tests cover the DOM behavior and Chromium, Firefox, and WebKit screen/print
+media rendering. The recorded-palette tests replay 19 distinct study palettes
+representing 62 scheme observations; they do not reproduce operating-system
+forced-color painting. Check real print preview and paper output too:
+pagination, printer settings, and assistive-technology behavior are not
+established by these tests.
 
 ## Development
 
 ```bash
 npm install
 npm run test:run
+npm run test:browser
 npm run lint
 ```
+
+Install the browser test engines with `npx playwright install` when needed.
+Browser tests run with one worker on a dedicated local fixture server.
+The CDN tests intercept imports with the checked-out implementation; they
+check registration paths, not CDN availability or the currently published code.
 
 ## License
 
