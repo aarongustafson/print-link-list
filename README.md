@@ -1,6 +1,10 @@
 # `<print-link-list>`
 
-[![npm version](https://img.shields.io/npm/v/@aarongustafson/print-link-list.svg)](https://www.npmjs.com/package/@aarongustafson/print-link-list) [![Build Status](https://img.shields.io/github/actions/workflow/status/aarongustafson/print-link-list/ci.yml?branch=main)](https://github.com/aarongustafson/print-link-list/actions)
+[![npm version](https://img.shields.io/npm/v/@aarongustafson/print-link-list.svg)](https://www.npmjs.com/package/@aarongustafson/print-link-list)
+[![CI status](https://img.shields.io/github/actions/workflow/status/aarongustafson/print-link-list/ci.yml?branch=main&label=CI)](https://github.com/aarongustafson/print-link-list/actions/workflows/ci.yml)
+[![Minified + gzipped size](https://img.shields.io/bundlejs/size/@aarongustafson/print-link-list?format=minzip&label=min%2Bgzip)](https://bundlejs.com/?q=@aarongustafson/print-link-list)
+[![License](https://img.shields.io/npm/l/@aarongustafson/print-link-list)](https://github.com/aarongustafson/print-link-list/blob/main/LICENSE)
+[![Type definitions](https://img.shields.io/npm/types/@aarongustafson/print-link-list)](https://github.com/aarongustafson/print-link-list/blob/main/index.d.ts)
 
 `<print-link-list>` generates a numbered, deduplicated list of links and citations for printed web pages. It is a modern Web Component interpretation of [“Improving Link Display for Print”](https://alistapart.com/article/improvingprint/).
 
