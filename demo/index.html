@@ -6,23 +6,6 @@
 		<title>&lt;print-link-list&gt; Web Component Demo</title>
 		<link rel="stylesheet" href="./styles.css" />
 		<style>
-			.actions {
-				display: flex;
-				flex-wrap: wrap;
-				gap: 0.75rem;
-				margin-block: 1rem;
-			}
-
-			.actions button {
-				background: ButtonFace;
-				border: 1px solid ButtonBorder;
-				border-radius: 4px;
-				color: ButtonText;
-				cursor: pointer;
-				font: inherit;
-				padding: 0.5rem 0.75rem;
-			}
-
 			#dynamic-example {
 				--print-link-list-marker-font-size: 0.85em;
 			}
@@ -41,26 +24,6 @@
 
 			.styled-list::part(item) {
 				margin-block: 0.25em;
-			}
-
-			@media print {
-				header,
-				.introduction,
-				.actions,
-				.demo-section > p,
-				footer,
-				pre {
-					display: none;
-				}
-
-				.code-demo-pair {
-					display: block;
-				}
-
-				.demo {
-					border: 0;
-					padding: 0;
-				}
 			}
 		</style>
 	</head>
@@ -84,7 +47,13 @@
 					Each example is independently scoped. Open print preview to
 					see its numbered markers and destination list.
 				</p>
-				<div class="actions">
+				<p>
+					Use your browser’s Print command at any time. Without
+					JavaScript, or if the module fails to load, the original
+					links and citations remain readable and printable; the
+					numbered destination lists require enhancement.
+				</p>
+				<div class="actions" hidden>
 					<button type="button" data-print>Open print dialog</button>
 				</div>
 			</div>
@@ -188,8 +157,8 @@
 				<h2>Filtering and useful destinations</h2>
 				<div class="demo-section">
 					<p>
-						Repeated destinations share a number. Fragment links
-						and opted-out subtrees are ignored, while useful email,
+						Repeated destinations share a number. Fragment links and
+						opted-out subtrees are ignored, while useful email,
 						telephone, and download destinations are included.
 					</p>
 					<div class="code-demo-pair">
@@ -198,7 +167,7 @@
     Email the team
   &lt;/a&gt;
   &lt;a href="tel:+15551234567"&gt;Call support&lt;/a&gt;
-  &lt;a href="./sample.pdf" download&gt;Download the sample&lt;/a&gt;
+  &lt;a href="../README.md" download&gt;Download the README&lt;/a&gt;
   &lt;a href="#local"&gt;Jump locally&lt;/a&gt;
 
   &lt;nav data-print-link-list-ignore&gt;
@@ -215,10 +184,10 @@
 								<a
 									href="mailto:hello@example.com?subject=Print%20demo"
 									>Email the team</a
-								>,
-								<a href="tel:+15551234567">call support</a>, or
-								<a href="./sample.pdf" download
-									>download the sample</a
+								>, <a href="tel:+15551234567">call support</a>,
+								or
+								<a href="../README.md" download
+									>download the README</a
 								>.
 							</p>
 							<p>
@@ -255,13 +224,13 @@
 					</p>
 					<div class="code-demo-pair">
 						<pre><code>&lt;style&gt;
-						  #dynamic-example {
+  #dynamic-example {
     --print-link-list-marker-font-size: 0.85em;
   }
-						  .styled-list {
-						    --print-link-list-margin: 1rem;
-						  }
-						  .styled-list::part(heading) {
+  .styled-list {
+    --print-link-list-margin: 1rem;
+  }
+  .styled-list::part(heading) {
     font-family: ui-serif, Georgia, serif;
   }
 &lt;/style&gt;
@@ -284,7 +253,7 @@
 									>.
 								</p>
 							</div>
-							<div class="actions">
+							<div class="actions" hidden>
 								<button type="button" id="add-link">
 									Add another link
 								</button>
@@ -292,6 +261,9 @@
 									Open print dialog
 								</button>
 							</div>
+							<output class="screen-only" aria-live="polite">
+								Links added: <span id="added-count">0</span>
+							</output>
 
 							<print-link-list
 								class="styled-list"
@@ -307,23 +279,40 @@
 		<footer>
 			<p>
 				Made with ❤️ by
-				<a href="https://github.com/aarongustafson"
-					>Aaron Gustafson</a
-				>.
+				<a href="https://github.com/aarongustafson">Aaron Gustafson</a>.
 			</p>
 		</footer>
 
 		<script src="../define.js" type="module"></script>
+		<template id="additional-link">
+			<p>
+				Read the
+				<a
+					href="https://developer.mozilla.org/docs/Web/API/CustomEvent#example"
+					>CustomEvent example</a
+				>.
+			</p>
+		</template>
 		<script type="module">
+			await customElements.whenDefined('print-link-list');
+			for (const actions of document.querySelectorAll('.actions')) {
+				actions.hidden = false;
+			}
 			const dynamicContent = document.querySelector('.dynamic-content');
 			let dynamicLinkCount = 0;
 
-			document.querySelector('#add-link').addEventListener('click', () => {
-				dynamicLinkCount += 1;
-				const paragraph = document.createElement('p');
-				paragraph.innerHTML = `Added link ${dynamicLinkCount}: <a href="https://developer.mozilla.org/docs/Web/API/CustomEvent#example">CustomEvent example</a>.`;
-				dynamicContent.append(paragraph);
-			});
+			document
+				.querySelector('#add-link')
+				.addEventListener('click', () => {
+					dynamicLinkCount += 1;
+					dynamicContent.append(
+						document
+							.querySelector('#additional-link')
+							.content.cloneNode(true),
+					);
+					document.querySelector('#added-count').textContent =
+						String(dynamicLinkCount);
+				});
 
 			for (const button of document.querySelectorAll('[data-print]')) {
 				button.addEventListener('click', () => window.print());
