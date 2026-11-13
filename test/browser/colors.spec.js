@@ -93,7 +93,7 @@ async function demo(page, name = 'index.html') {
 			contentType: 'text/javascript',
 			body: definition.replace(
 				"'./print-link-list.js'",
-				"'http://127.0.0.1:4193/print-link-list.js'",
+				`'http://127.0.0.1:${process.env.PORT || 4193}/print-link-list.js'`,
 			),
 		}),
 	);

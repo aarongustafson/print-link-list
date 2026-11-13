@@ -67,7 +67,7 @@
 						its containing demo block.
 					</p>
 					<div class="code-demo-pair">
-						<pre><code>&lt;div id="default-example"&gt;
+						<pre tabindex="0"><code>&lt;div id="default-example"&gt;
   &lt;p&gt;
     Read the
     &lt;a href="https://alistapart.com/article/improvingprint/"&gt;
@@ -78,8 +78,8 @@
     Paged media has different presentation needs.
   &lt;/blockquote&gt;
 
-  &lt;print-link-list target="#default-example"&gt;
-  &lt;/print-link-list&gt;
+  <mark>&lt;print-link-list target="#default-example"&gt;</mark>
+  <mark>&lt;/print-link-list&gt;</mark>
 &lt;/div&gt;</code></pre>
 						<div class="demo" id="default-example">
 							<p>
@@ -116,16 +116,18 @@
 						citation superscripts.
 					</p>
 					<div class="code-demo-pair">
-						<pre><code>&lt;div id="localized-example" lang="es"&gt;
+						<pre
+							tabindex="0"
+						><code>&lt;div id="localized-example" lang="es"&gt;
   &lt;q cite="https://www.w3.org/WAI/fundamentals/accessibility-intro/"&gt;
     La Web está diseñada fundamentalmente para todas las personas.
   &lt;/q&gt;
 
-  &lt;print-link-list
+  <mark>&lt;print-link-list
     target="#localized-example"
     heading="Referencias"
     label-source="Fuente"
-  &gt;&lt;/print-link-list&gt;
+  &gt;</mark><mark>&lt;/print-link-list&gt;</mark>
 &lt;/div&gt;</code></pre>
 						<div class="demo" id="localized-example" lang="es">
 							<p>
@@ -162,7 +164,9 @@
 						telephone, and download destinations are included.
 					</p>
 					<div class="code-demo-pair">
-						<pre><code>&lt;div id="filtered-example"&gt;
+						<pre
+							tabindex="0"
+						><code>&lt;div id="filtered-example"&gt;
   &lt;a href="mailto:hello@example.com?subject=Demo"&gt;
     Email the team
   &lt;/a&gt;
@@ -170,14 +174,14 @@
   &lt;a href="../README.md" download&gt;Download the README&lt;/a&gt;
   &lt;a href="#local"&gt;Jump locally&lt;/a&gt;
 
-  &lt;nav data-print-link-list-ignore&gt;
+  &lt;nav <mark>data-print-link-list-ignore</mark>&gt;
     &lt;a href="https://example.com/account"&gt;Account&lt;/a&gt;
   &lt;/nav&gt;
 
-  &lt;print-link-list
+  <mark>&lt;print-link-list
     target="#filtered-example"
     heading="Contact and downloads"
-  &gt;&lt;/print-link-list&gt;
+  &gt;</mark><mark>&lt;/print-link-list&gt;</mark>
 &lt;/div&gt;</code></pre>
 						<div class="demo" id="filtered-example">
 							<p>
@@ -223,25 +227,25 @@
 						customizes marker sizing and shadow parts for print.
 					</p>
 					<div class="code-demo-pair">
-						<pre><code>&lt;style&gt;
+						<pre tabindex="0"><code>&lt;style&gt;
   #dynamic-example {
-    --print-link-list-marker-font-size: 0.85em;
+    <mark>--print-link-list-marker-font-size: 0.85em;</mark>
   }
   .styled-list {
-    --print-link-list-margin: 1rem;
+    <mark>--print-link-list-margin: 1rem;</mark>
   }
-  .styled-list::part(heading) {
+  <mark>.styled-list::part(heading)</mark> {
     font-family: ui-serif, Georgia, serif;
   }
 &lt;/style&gt;
 
 &lt;div id="dynamic-example"&gt;
   &lt;div class="dynamic-content"&gt;…&lt;/div&gt;
-  &lt;print-link-list
+  <mark>&lt;print-link-list
     class="styled-list"
     target="#dynamic-example"
     heading="Further reading"
-  &gt;&lt;/print-link-list&gt;
+  &gt;</mark><mark>&lt;/print-link-list&gt;</mark>
 &lt;/div&gt;</code></pre>
 						<div class="demo" id="dynamic-example">
 							<div class="dynamic-content">
