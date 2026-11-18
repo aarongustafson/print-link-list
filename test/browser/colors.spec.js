@@ -1,11 +1,20 @@
 import { readFile } from 'node:fs/promises';
 import { test, expect } from '@playwright/test';
 
+test.beforeEach(async ({ page }) => {
+	await page.route(
+		'https://cdn.jsdelivr.net/npm/microlighter@2.2.0/dist/**',
+		(route) => route.abort(),
+	);
+});
+
 const read = (path) =>
 	readFile(new URL(`../../${path}`, import.meta.url), 'utf8');
 const source = await read('print-link-list.js');
 const definition = await read('define.js');
-const css = await read('demo/styles.css');
+const css = (
+	await Promise.all(['demo/styles.css', 'demo/demo-shell.css'].map(read))
+).join('\n');
 const tokens = [
 	'Canvas',
 	'CanvasText',
@@ -175,25 +184,9 @@ for (const name of ['index.html', 'esm.html', 'unpkg.html']) {
 			await expect(page.locator(':focus')).toBeVisible();
 			const link = page.locator('a').first();
 			await link.focus();
-			const native = await link.evaluate((node) => {
-				const result = {
-					style: getComputedStyle(node).outlineStyle,
-					width: getComputedStyle(node).outlineWidth,
-				};
-				const probe = document.createElement('a');
-				probe.href = '#';
-				probe.textContent = 'Native focus probe';
-				document.body.append(probe);
-				probe.style.all = 'revert';
-				probe.focus();
-				const reference = {
-					style: getComputedStyle(probe).outlineStyle,
-					width: getComputedStyle(probe).outlineWidth,
-				};
-				probe.remove();
-				return { result, reference };
-			});
-			expect(native.result).toEqual(native.reference);
+			await expect(link).toBeFocused();
+			await expect(link).toHaveCSS('outline-style', 'solid');
+			await expect(link).toHaveCSS('outline-width', '3px');
 			await page.setViewportSize({ width: 320, height: 800 });
 			expect(
 				await page.evaluate(() => document.documentElement.scrollWidth),

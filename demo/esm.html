@@ -5,11 +5,14 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>print-link-list via esm.sh</title>
 		<link rel="stylesheet" href="./styles.css" />
+		<link rel="stylesheet" href="./demo-shell.css" />
 	</head>
-	<body>
+	<body data-syntax-theme="github">
+		<a class="skip-link" href="#main">Skip to examples</a>
 		<header>
-			<h1>&lt;print-link-list&gt; via esm.sh</h1>
-			<p>
+			<p class="eyebrow">Web component / esm</p>
+			<h1>&lt;print-link-list&gt;</h1>
+			<p class="lede">
 				Class-only import. See the
 				<a
 					href="https://github.com/aarongustafson/print-link-list#readme"
@@ -17,9 +20,27 @@
 				>
 				for the API.
 			</p>
+			<nav aria-label="Component resources">
+				<a
+					href="https://github.com/aarongustafson/print-link-list/blob/main/README.md"
+					>Read the README</a
+				>
+				<a href="https://github.com/aarongustafson/print-link-list"
+					>View on GitHub</a
+				>
+				<a href="./index.html">All examples</a>
+				<a href="./unpkg.html">unpkg example</a>
+			</nav>
 		</header>
 
-		<main>
+		<main id="main" tabindex="-1">
+			<p
+				id="microlighter-status"
+				class="enhancement-status"
+				role="status"
+				hidden
+			></p>
+
 			<p class="introduction">
 				This page loads the class from
 				<a href="https://esm.sh/">esm.sh</a> and registers it manually.
@@ -30,9 +51,16 @@
 			<section class="demo-section">
 				<h2>Register the class, then print</h2>
 				<div class="code-demo-pair">
-					<pre
-						tabindex="0"
-					><code><mark>import { PrintLinkListElement } from
+					<micro-lighter
+						class="code-panel"
+						language="javascript"
+						controls="copy"
+						data-label="JavaScript"
+					>
+						<pre
+							aria-label="Register the class, then print code 1"
+							tabindex="0"
+						><code><mark>import { PrintLinkListElement } from
   'https://esm.sh/@aarongustafson/print-link-list@1.0.3/print-link-list.js?bundle&amp;target=es2022';</mark>
 <mark>customElements.define('print-link-list', PrintLinkListElement);</mark>
 
@@ -40,6 +68,7 @@
   &lt;a href="https://www.w3.org/TR/css-page-3/"&gt;Paged media&lt;/a&gt;
   <mark>&lt;print-link-list target="#reading"&gt;</mark><mark>&lt;/print-link-list&gt;</mark>
 &lt;/div&gt;</code></pre>
+					</micro-lighter>
 					<div class="demo" id="reading">
 						<p>
 							Read the
@@ -66,5 +95,6 @@
 				customElements.define('print-link-list', PrintLinkListElement);
 			}
 		</script>
+		<script type="module" src="./code-examples.js"></script>
 	</body>
 </html>

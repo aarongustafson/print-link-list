@@ -5,6 +5,7 @@
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>&lt;print-link-list&gt; Web Component Demo</title>
 		<link rel="stylesheet" href="./styles.css" />
+		<link rel="stylesheet" href="./demo-shell.css" />
 		<style>
 			#dynamic-example {
 				--print-link-list-marker-font-size: 0.85em;
@@ -27,10 +28,12 @@
 			}
 		</style>
 	</head>
-	<body>
+	<body data-syntax-theme="github">
+		<a class="skip-link" href="#main">Skip to examples</a>
 		<header>
+			<p class="eyebrow">Web component / Examples</p>
 			<h1>&lt;print-link-list&gt;</h1>
-			<p>
+			<p class="lede">
 				A deduplicated list of links and citations for printed web
 				pages. See the
 				<a
@@ -39,9 +42,27 @@
 				>
 				for installation and API documentation.
 			</p>
+			<nav aria-label="Component resources">
+				<a
+					href="https://github.com/aarongustafson/print-link-list/blob/main/README.md"
+					>Read the README</a
+				>
+				<a href="https://github.com/aarongustafson/print-link-list"
+					>View on GitHub</a
+				>
+				<a href="./esm.html">esm.sh example</a>
+				<a href="./unpkg.html">unpkg example</a>
+			</nav>
 		</header>
 
-		<main>
+		<main id="main" tabindex="-1">
+			<p
+				id="microlighter-status"
+				class="enhancement-status"
+				role="status"
+				hidden
+			></p>
+
 			<div class="introduction">
 				<p>
 					Each example is independently scoped. Open print preview to
@@ -67,7 +88,16 @@
 						its containing demo block.
 					</p>
 					<div class="code-demo-pair">
-						<pre tabindex="0"><code>&lt;div id="default-example"&gt;
+						<micro-lighter
+							class="code-panel"
+							language="html"
+							controls="copy"
+							data-label="HTML"
+						>
+							<pre
+								aria-label="Example code 1"
+								tabindex="0"
+							><code>&lt;div id="default-example"&gt;
   &lt;p&gt;
     Read the
     &lt;a href="https://alistapart.com/article/improvingprint/"&gt;
@@ -81,6 +111,7 @@
   <mark>&lt;print-link-list target="#default-example"&gt;</mark>
   <mark>&lt;/print-link-list&gt;</mark>
 &lt;/div&gt;</code></pre>
+						</micro-lighter>
 						<div class="demo" id="default-example">
 							<p>
 								Read the
@@ -116,9 +147,16 @@
 						citation superscripts.
 					</p>
 					<div class="code-demo-pair">
-						<pre
-							tabindex="0"
-						><code>&lt;div id="localized-example" lang="es"&gt;
+						<micro-lighter
+							class="code-panel"
+							language="html"
+							controls="copy"
+							data-label="HTML"
+						>
+							<pre
+								aria-label="Example code 2"
+								tabindex="0"
+							><code>&lt;div id="localized-example" lang="es"&gt;
   &lt;q cite="https://www.w3.org/WAI/fundamentals/accessibility-intro/"&gt;
     La Web está diseñada fundamentalmente para todas las personas.
   &lt;/q&gt;
@@ -129,6 +167,7 @@
     label-source="Fuente"
   &gt;</mark><mark>&lt;/print-link-list&gt;</mark>
 &lt;/div&gt;</code></pre>
+						</micro-lighter>
 						<div class="demo" id="localized-example" lang="es">
 							<p>
 								<q
@@ -164,9 +203,16 @@
 						telephone, and download destinations are included.
 					</p>
 					<div class="code-demo-pair">
-						<pre
-							tabindex="0"
-						><code>&lt;div id="filtered-example"&gt;
+						<micro-lighter
+							class="code-panel"
+							language="html"
+							controls="copy"
+							data-label="HTML"
+						>
+							<pre
+								aria-label="Example code 3"
+								tabindex="0"
+							><code>&lt;div id="filtered-example"&gt;
   &lt;a href="mailto:hello@example.com?subject=Demo"&gt;
     Email the team
   &lt;/a&gt;
@@ -183,6 +229,7 @@
     heading="Contact and downloads"
   &gt;</mark><mark>&lt;/print-link-list&gt;</mark>
 &lt;/div&gt;</code></pre>
+						</micro-lighter>
 						<div class="demo" id="filtered-example">
 							<p>
 								<a
@@ -227,7 +274,16 @@
 						customizes marker sizing and shadow parts for print.
 					</p>
 					<div class="code-demo-pair">
-						<pre tabindex="0"><code>&lt;style&gt;
+						<micro-lighter
+							class="code-panel"
+							language="html"
+							controls="copy"
+							data-label="HTML"
+						>
+							<pre
+								aria-label="Example code 4"
+								tabindex="0"
+							><code>&lt;style&gt;
   #dynamic-example {
     <mark>--print-link-list-marker-font-size: 0.85em;</mark>
   }
@@ -247,6 +303,7 @@
     heading="Further reading"
   &gt;</mark><mark>&lt;/print-link-list&gt;</mark>
 &lt;/div&gt;</code></pre>
+						</micro-lighter>
 						<div class="demo" id="dynamic-example">
 							<div class="dynamic-content">
 								<p>
@@ -322,5 +379,6 @@
 				button.addEventListener('click', () => window.print());
 			}
 		</script>
+		<script type="module" src="./code-examples.js"></script>
 	</body>
 </html>
