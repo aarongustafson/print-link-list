@@ -12,7 +12,9 @@ const read = (path) =>
 	readFile(new URL(`../../${path}`, import.meta.url), 'utf8');
 const source = await read('print-link-list.js');
 const definition = await read('define.js');
-const css = await read('demo/styles.css');
+const css = (
+	await Promise.all(['demo/styles.css', 'demo/demo-shell.css'].map(read))
+).join('\n');
 const tokens = [
 	'Canvas',
 	'CanvasText',

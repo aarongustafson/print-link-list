@@ -381,6 +381,18 @@ h1 code {
 	.code-demo-pair {
 		display: block;
 	}
+	body {
+		max-width: none;
+		padding: 0;
+	}
+	.demo-section,
+	.demo {
+		border: 0;
+		padding: 0;
+	}
+	a:any-link {
+		color: inherit;
+	}
 	pre {
 		white-space: pre-wrap;
 		overflow-wrap: anywhere;

@@ -268,4 +268,22 @@ test('printing hides complete code panels and retains light live-example surface
 	await expect(page.locator('micro-lighter').first()).toBeHidden();
 	await expect(page.locator('body')).toHaveCSS('color-scheme', 'light');
 	await expect(page.locator('html')).toHaveCSS('color-scheme', 'light');
+	await expect(page.locator('body')).toHaveCSS('padding', '0px');
+	await expect(page.locator('.demo-section').first()).toHaveCSS(
+		'padding',
+		'0px',
+	);
+	await expect(page.locator('.demo-section').first()).toHaveCSS(
+		'border-top-width',
+		'0px',
+	);
+	await expect(page.locator('.demo').first()).toHaveCSS('padding', '0px');
+	await expect(page.locator('.demo').first()).toHaveCSS(
+		'border-width',
+		'0px',
+	);
+	await expect(page.locator('.demo a').first()).toHaveCSS(
+		'color',
+		'rgb(0, 0, 0)',
+	);
 });
