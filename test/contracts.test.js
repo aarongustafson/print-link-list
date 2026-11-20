@@ -5,6 +5,13 @@ import { describe, expect, it } from 'vitest';
 const read = (path) => readFile(resolve(process.cwd(), path), 'utf8');
 
 describe('demo and publishing contracts', () => {
+	it('trims block-edge margins inside demo sections', async () => {
+		const styles = await read('demo/demo-shell.css');
+		expect(styles).toMatch(
+			/\.demo-section(?:,\s*\.api-reference)?\s*\{[^}]*\bmargin-trim:\s*block;/,
+		);
+	});
+
 	it('retains the version update, staging, and push automation', async () => {
 		const manifest = JSON.parse(await read('package.json'));
 		expect(manifest.scripts.version).toBe(
@@ -24,7 +31,7 @@ describe('demo and publishing contracts', () => {
 		expect(runtime).not.toContain('window.print =');
 	});
 
-	it('keeps shared prose pairs and native focus without blanket forced-color fills', async () => {
+	it('keeps local examples free of global focus and forced-color overrides', async () => {
 		const css = await read('demo/styles.css');
 		expect(css).not.toMatch(
 			/GrayText|ActiveText|SelectedItem|AccentColor|Highlight/,

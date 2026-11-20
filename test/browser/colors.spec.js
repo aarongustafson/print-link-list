@@ -1,5 +1,6 @@
 import { readFile } from 'node:fs/promises';
 import { test, expect } from '@playwright/test';
+import { expectNativeFocus, readDemoStyles } from './demo-fixture.js';
 
 test.beforeEach(async ({ page }) => {
 	await page.route(
@@ -12,9 +13,7 @@ const read = (path) =>
 	readFile(new URL(`../../${path}`, import.meta.url), 'utf8');
 const source = await read('print-link-list.js');
 const definition = await read('define.js');
-const css = (
-	await Promise.all(['demo/styles.css', 'demo/demo-shell.css'].map(read))
-).join('\n');
+const css = await readDemoStyles();
 const tokens = [
 	'Canvas',
 	'CanvasText',
@@ -185,8 +184,7 @@ for (const name of ['index.html', 'esm.html', 'unpkg.html']) {
 			const link = page.locator('a').first();
 			await link.focus();
 			await expect(link).toBeFocused();
-			await expect(link).toHaveCSS('outline-style', 'solid');
-			await expect(link).toHaveCSS('outline-width', '3px');
+			await expectNativeFocus(link);
 			await page.setViewportSize({ width: 320, height: 800 });
 			expect(
 				await page.evaluate(() => document.documentElement.scrollWidth),
@@ -206,6 +204,10 @@ for (const name of ['index.html', 'esm.html', 'unpkg.html']) {
 				'rgb(255, 255, 255)',
 			);
 			await expect(page.locator('pre').first()).toBeHidden();
+			await expect(page.locator('header')).toBeHidden();
+			await expect(page.locator('footer')).toBeHidden();
+			await expect(page.locator('micro-lighter').first()).toBeHidden();
+			await expect(page.locator('body')).toHaveCSS('padding-top', '0px');
 		});
 	}
 }

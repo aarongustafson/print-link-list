@@ -4,31 +4,10 @@
 		<meta charset="UTF-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>&lt;print-link-list&gt; Web Component Demo</title>
-		<link rel="stylesheet" href="./styles.css" />
 		<link rel="stylesheet" href="./demo-shell.css" />
-		<style>
-			#dynamic-example {
-				--print-link-list-marker-font-size: 0.85em;
-			}
-
-			.styled-list {
-				--print-link-list-margin: 1rem;
-			}
-
-			.styled-list::part(heading) {
-				font-family: ui-serif, Georgia, serif;
-			}
-
-			.styled-list::part(list) {
-				font-size: 9pt;
-			}
-
-			.styled-list::part(item) {
-				margin-block: 0.25em;
-			}
-		</style>
+		<link rel="stylesheet" href="./styles.css" />
 	</head>
-	<body data-syntax-theme="github">
+	<body data-syntax-theme="github" data-demo-page="full">
 		<a class="skip-link" href="#main">Skip to examples</a>
 		<header>
 			<p class="eyebrow">Web component / Examples</p>
@@ -60,6 +39,9 @@
 				id="microlighter-status"
 				class="enhancement-status"
 				role="status"
+				data-loading-message="Loading optional code highlighting…"
+				data-failure-message="Code remains readable and selectable. Optional highlighting and Copy controls could not load."
+				data-theme-failure-message="Code highlighting and Copy controls are available, but the syntax theme could not load."
 				hidden
 			></p>
 
@@ -112,7 +94,11 @@
   <mark>&lt;/print-link-list&gt;</mark>
 &lt;/div&gt;</code></pre>
 						</micro-lighter>
-						<div class="demo" id="default-example">
+						<div
+							class="demo"
+							id="default-example"
+							data-demo-label="Live example"
+						>
 							<p>
 								Read the
 								<a
@@ -168,7 +154,12 @@
   &gt;</mark><mark>&lt;/print-link-list&gt;</mark>
 &lt;/div&gt;</code></pre>
 						</micro-lighter>
-						<div class="demo" id="localized-example" lang="es">
+						<div
+							class="demo"
+							id="localized-example"
+							lang="es"
+							data-demo-label="Ejemplo interactivo"
+						>
 							<p>
 								<q
 									cite="https://www.w3.org/WAI/fundamentals/accessibility-intro/"
@@ -230,7 +221,11 @@
   &gt;</mark><mark>&lt;/print-link-list&gt;</mark>
 &lt;/div&gt;</code></pre>
 						</micro-lighter>
-						<div class="demo" id="filtered-example">
+						<div
+							class="demo"
+							id="filtered-example"
+							data-demo-label="Live example"
+						>
 							<p>
 								<a
 									href="mailto:hello@example.com?subject=Print%20demo"
@@ -304,7 +299,11 @@
   &gt;</mark><mark>&lt;/print-link-list&gt;</mark>
 &lt;/div&gt;</code></pre>
 						</micro-lighter>
-						<div class="demo" id="dynamic-example">
+						<div
+							class="demo"
+							id="dynamic-example"
+							data-demo-label="Live example"
+						>
 							<div class="dynamic-content">
 								<p>
 									Start with the

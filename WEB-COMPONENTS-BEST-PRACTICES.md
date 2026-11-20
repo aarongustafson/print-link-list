@@ -72,7 +72,7 @@ The `attributeChangedCallback` only handles side effects, not the full state upd
 ```javascript
 attributeChangedCallback(name, oldValue, newValue) {
   if (oldValue === newValue) return;
-  
+
   switch (name) {
     case 'example-attribute':
       // Only handle side effects here
@@ -135,11 +135,13 @@ Dispatch events when your component's state changes internally:
 
 ```javascript
 // Dispatch when component changes its own state
-this.dispatchEvent(new CustomEvent('component-name:change', {
-  detail: { value: newValue },
-  bubbles: true,
-  composed: true
-}));
+this.dispatchEvent(
+  new CustomEvent('component-name:change', {
+    detail: { value: newValue },
+    bubbles: true,
+    composed: true,
+  }),
+);
 ```
 
 ### ❌ Don't Dispatch Events for Host-Set Properties
