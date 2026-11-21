@@ -4,10 +4,10 @@
 		<meta charset="utf-8" />
 		<meta name="viewport" content="width=device-width, initial-scale=1" />
 		<title>print-link-list via unpkg</title>
-		<link rel="stylesheet" href="./styles.css" />
 		<link rel="stylesheet" href="./demo-shell.css" />
+		<link rel="stylesheet" href="./styles.css" />
 	</head>
-	<body data-syntax-theme="github">
+	<body data-syntax-theme="github" data-demo-page="full">
 		<a class="skip-link" href="#main">Skip to examples</a>
 		<header>
 			<p class="eyebrow">Web component / unpkg</p>
@@ -38,6 +38,9 @@
 				id="microlighter-status"
 				class="enhancement-status"
 				role="status"
+				data-loading-message="Loading optional code highlighting…"
+				data-failure-message="Code remains readable and selectable. Optional highlighting and Copy controls could not load."
+				data-theme-failure-message="Code highlighting and Copy controls are available, but the syntax theme could not load."
 				hidden
 			></p>
 
@@ -70,7 +73,11 @@
   <mark>&lt;print-link-list target="#reading"&gt;</mark><mark>&lt;/print-link-list&gt;</mark>
 &lt;/div&gt;</code></pre>
 					</micro-lighter>
-					<div class="demo" id="reading">
+					<div
+						class="demo"
+						id="reading"
+						data-demo-label="Live example"
+					>
 						<p>
 							Read the
 							<a href="https://www.w3.org/TR/css-page-3/"

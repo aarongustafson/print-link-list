@@ -3,9 +3,7 @@ export interface PrintLinkListUpdateDetail {
 	references: number;
 }
 
-export type PrintLinkListErrorType =
-	| 'invalid-target'
-	| 'target-not-found';
+export type PrintLinkListErrorType = 'invalid-target' | 'target-not-found';
 
 export interface PrintLinkListErrorDetail {
 	message: string;
